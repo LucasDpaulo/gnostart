@@ -1,0 +1,618 @@
+{
+  "version": 2,
+  "meta": {
+    "id": "gnostart-2026",
+    "name": "GNOSTART 2026"
+  },
+  "map": {
+    "image": "map.webp",
+    "width": 1527,
+    "height": 912
+  },
+  "theme": {
+    "primary": "#6a38d0",
+    "accent": "#9a8bd9",
+    "surface": "#ffffff"
+  },
+  "pois": [
+    {
+      "id": "area_das_startups",
+      "name": "Area das Startups",
+      "type": "atividade",
+      "x": 774,
+      "y": 390,
+      "waypointId": "w37",
+      "photo": "Startups.jpeg"
+    },
+    {
+      "id": "area_de_alimentacao",
+      "name": "Area de Alimentacao",
+      "type": "servico",
+      "x": 694,
+      "y": 313,
+      "waypointId": "w3",
+      "photo": "Areadealimentacao.png"
+    },
+    {
+      "id": "area_de_fotos",
+      "name": "Area de Fotos",
+      "type": "atividade",
+      "x": 745,
+      "y": 330,
+      "waypointId": "w4",
+      "photo": "Areadefotos.jpeg"
+    },
+    {
+      "id": "asces",
+      "name": "ASCES",
+      "type": "atividade",
+      "x": 686,
+      "y": 349,
+      "waypointId": "w7",
+      "photo": "Asces.png"
+    },
+    {
+      "id": "banheiros",
+      "name": "Banheiros",
+      "type": "banheiro",
+      "x": 764,
+      "y": 313,
+      "waypointId": "w1",
+      "photo": "Banheiros.jpeg"
+    },
+    {
+      "id": "barracas_prefeitura",
+      "name": "Barracas Prefeitura",
+      "type": "servico",
+      "x": 708,
+      "y": 379,
+      "waypointId": "w26",
+      "photo": "Barracasprefeitura.png"
+    },
+    {
+      "id": "cafeteria",
+      "name": "Cafeteria",
+      "type": "servico",
+      "x": 814,
+      "y": 390,
+      "waypointId": "w42",
+      "photo": "Cafeteria.jpeg"
+    },
+    {
+      "id": "credenciamento",
+      "name": "Credenciamento",
+      "type": "servico",
+      "x": 749,
+      "y": 400,
+      "waypointId": "w41",
+      "photo": "Credenciamento.jpeg"
+    },
+    {
+      "id": "credenciamento_caravanas",
+      "name": "Credenciamento Caravanas",
+      "type": "servico",
+      "x": 715,
+      "y": 334,
+      "waypointId": "w5",
+      "photo": "Credenciamentocaravanas.jpeg"
+    },
+    {
+      "id": "entrada_caravanas",
+      "name": "Entrada Caravanas",
+      "type": "entrada",
+      "x": 713,
+      "y": 322,
+      "waypointId": "w5",
+      "photo": "Entradacaravanas.jpeg"
+    },
+    {
+      "id": "entrada_principal",
+      "name": "Entrada Principal",
+      "type": "entrada",
+      "x": 752,
+      "y": 389,
+      "waypointId": "w28",
+      "photo": "Entradaprincipal.jpeg"
+    },
+    {
+      "id": "estande_realidade_virtual",
+      "name": "Estande Realidade Virtual",
+      "type": "atividade",
+      "x": 730,
+      "y": 330,
+      "waypointId": "w4",
+      "photo": "Realidadevirtual.jpeg"
+    },
+    {
+      "id": "jardim_digital",
+      "name": "Jardim Digital",
+      "type": "atividade",
+      "x": 722,
+      "y": 393,
+      "waypointId": "w36",
+      "photo": "Jardimdigital.png"
+    },
+    {
+      "id": "palco_principal",
+      "name": "Palco Principal",
+      "type": "atividade",
+      "x": 778,
+      "y": 344,
+      "waypointId": "w12",
+      "photo": "Palcoprincipal.png"
+    },
+    {
+      "id": "sala_da_arena_gamer",
+      "name": "Sala da Arena Gamer",
+      "type": "atividade",
+      "x": 838,
+      "y": 340,
+      "waypointId": "w32",
+      "photo": "saladaarenagamer.jpeg"
+    },
+    {
+      "id": "sala_de_economia_criativa_02",
+      "name": "Sala de Economia Criativa 02",
+      "type": "atividade",
+      "x": 863,
+      "y": 340,
+      "waypointId": "w10",
+      "photo": "Saladeeconomiacriativa.jpeg"
+    },
+    {
+      "id": "sala_de_empreendedorismo",
+      "name": "Sala de Empreendedorismo",
+      "type": "atividade",
+      "x": 865,
+      "y": 387,
+      "waypointId": "w33",
+      "photo": "Saladeempreendedorismo.jpeg"
+    },
+    {
+      "id": "senac",
+      "name": "SENAC",
+      "type": "atividade",
+      "x": 697,
+      "y": 331,
+      "waypointId": "w3",
+      "photo": "Senac.png"
+    },
+    {
+      "id": "senai",
+      "name": "SENAI",
+      "type": "atividade",
+      "x": 684,
+      "y": 374,
+      "waypointId": "w25",
+      "photo": "Senai.png"
+    },
+    {
+      "id": "uninassau",
+      "name": "UNINASSAU",
+      "type": "atividade",
+      "x": 696,
+      "y": 392,
+      "waypointId": "w40",
+      "photo": "Uninassau.png"
+    }
+  ],
+  "waypoints": [
+    {
+      "id": "w1",
+      "x": 762,
+      "y": 306,
+      "connections": [
+        "w2"
+      ]
+    },
+    {
+      "id": "w2",
+      "x": 762,
+      "y": 320,
+      "connections": [
+        "w1",
+        "w4"
+      ]
+    },
+    {
+      "id": "w3",
+      "x": 686,
+      "y": 322,
+      "connections": [
+        "w7"
+      ]
+    },
+    {
+      "id": "w4",
+      "x": 742,
+      "y": 324,
+      "connections": [
+        "w2",
+        "w9"
+      ]
+    },
+    {
+      "id": "w5",
+      "x": 712,
+      "y": 328,
+      "connections": [
+        "w8"
+      ]
+    },
+    {
+      "id": "w6",
+      "x": 660,
+      "y": 340,
+      "connections": [
+        "w7",
+        "w14",
+        "w15"
+      ]
+    },
+    {
+      "id": "w7",
+      "x": 680,
+      "y": 340,
+      "connections": [
+        "w3",
+        "w6"
+      ]
+    },
+    {
+      "id": "w8",
+      "x": 720,
+      "y": 342,
+      "connections": [
+        "w5",
+        "w9"
+      ]
+    },
+    {
+      "id": "w9",
+      "x": 742,
+      "y": 340,
+      "connections": [
+        "w4",
+        "w8",
+        "w16"
+      ]
+    },
+    {
+      "id": "w10",
+      "x": 880,
+      "y": 340,
+      "connections": [
+        "w18",
+        "w13",
+        "w19"
+      ]
+    },
+    {
+      "id": "w11",
+      "x": 916,
+      "y": 340,
+      "connections": [
+        "w20"
+      ]
+    },
+    {
+      "id": "w12",
+      "x": 784,
+      "y": 342,
+      "connections": [
+        "w17"
+      ]
+    },
+    {
+      "id": "w13",
+      "x": 900,
+      "y": 346,
+      "connections": [
+        "w10",
+        "w19",
+        "w18"
+      ]
+    },
+    {
+      "id": "w14",
+      "x": 644,
+      "y": 348,
+      "connections": [
+        "w6"
+      ]
+    },
+    {
+      "id": "w15",
+      "x": 656,
+      "y": 360,
+      "connections": [
+        "w6",
+        "w24",
+        "w22",
+        "w25"
+      ]
+    },
+    {
+      "id": "w16",
+      "x": 736,
+      "y": 360,
+      "connections": [
+        "w9",
+        "w21",
+        "w27"
+      ]
+    },
+    {
+      "id": "w17",
+      "x": 774,
+      "y": 354,
+      "connections": [
+        "w12",
+        "w21"
+      ]
+    },
+    {
+      "id": "w18",
+      "x": 880,
+      "y": 358,
+      "connections": [
+        "w10",
+        "w19",
+        "w13",
+        "w29"
+      ]
+    },
+    {
+      "id": "w19",
+      "x": 908,
+      "y": 350,
+      "connections": [
+        "w18",
+        "w13",
+        "w10",
+        "w20"
+      ]
+    },
+    {
+      "id": "w20",
+      "x": 914,
+      "y": 352,
+      "connections": [
+        "w19",
+        "w11"
+      ]
+    },
+    {
+      "id": "w21",
+      "x": 764,
+      "y": 362,
+      "connections": [
+        "w17",
+        "w16",
+        "w28"
+      ]
+    },
+    {
+      "id": "w22",
+      "x": 678,
+      "y": 364,
+      "connections": [
+        "w15",
+        "w25",
+        "w24"
+      ]
+    },
+    {
+      "id": "w23",
+      "x": 700,
+      "y": 364,
+      "connections": [
+        "w26"
+      ]
+    },
+    {
+      "id": "w24",
+      "x": 658,
+      "y": 380,
+      "connections": [
+        "w15",
+        "w25",
+        "w22",
+        "w30",
+        "w39"
+      ]
+    },
+    {
+      "id": "w25",
+      "x": 678,
+      "y": 380,
+      "connections": [
+        "w24",
+        "w22",
+        "w15",
+        "w26"
+      ]
+    },
+    {
+      "id": "w26",
+      "x": 700,
+      "y": 380,
+      "connections": [
+        "w23",
+        "w25",
+        "w36",
+        "w40"
+      ]
+    },
+    {
+      "id": "w27",
+      "x": 736,
+      "y": 380,
+      "connections": [
+        "w16",
+        "w36",
+        "w28",
+        "w41"
+      ]
+    },
+    {
+      "id": "w28",
+      "x": 760,
+      "y": 380,
+      "connections": [
+        "w21",
+        "w27",
+        "w37"
+      ]
+    },
+    {
+      "id": "w29",
+      "x": 880,
+      "y": 378,
+      "connections": [
+        "w18",
+        "w33",
+        "w35"
+      ]
+    },
+    {
+      "id": "w30",
+      "x": 640,
+      "y": 374,
+      "connections": [
+        "w24"
+      ]
+    },
+    {
+      "id": "w31",
+      "x": 820,
+      "y": 376,
+      "connections": [
+        "w32",
+        "w38",
+        "w42"
+      ]
+    },
+    {
+      "id": "w32",
+      "x": 840,
+      "y": 380,
+      "connections": [
+        "w31",
+        "w33",
+        "w43"
+      ]
+    },
+    {
+      "id": "w33",
+      "x": 860,
+      "y": 376,
+      "connections": [
+        "w32",
+        "w29"
+      ]
+    },
+    {
+      "id": "w34",
+      "x": 920,
+      "y": 378,
+      "connections": [
+        "w35"
+      ]
+    },
+    {
+      "id": "w35",
+      "x": 900,
+      "y": 382,
+      "connections": [
+        "w29",
+        "w34"
+      ]
+    },
+    {
+      "id": "w36",
+      "x": 720,
+      "y": 384,
+      "connections": [
+        "w26",
+        "w27"
+      ]
+    },
+    {
+      "id": "w37",
+      "x": 780,
+      "y": 384,
+      "connections": [
+        "w28",
+        "w38"
+      ]
+    },
+    {
+      "id": "w38",
+      "x": 800,
+      "y": 384,
+      "connections": [
+        "w37",
+        "w31"
+      ]
+    },
+    {
+      "id": "w39",
+      "x": 660,
+      "y": 392,
+      "connections": [
+        "w24"
+      ]
+    },
+    {
+      "id": "w40",
+      "x": 700,
+      "y": 392,
+      "connections": [
+        "w26"
+      ]
+    },
+    {
+      "id": "w41",
+      "x": 744,
+      "y": 398,
+      "connections": [
+        "w27"
+      ]
+    },
+    {
+      "id": "w42",
+      "x": 812,
+      "y": 394,
+      "connections": [
+        "w31",
+        "w45"
+      ]
+    },
+    {
+      "id": "w43",
+      "x": 840,
+      "y": 392,
+      "connections": [
+        "w32"
+      ]
+    },
+    {
+      "id": "w44",
+      "x": 778,
+      "y": 398,
+      "connections": [
+        "w45"
+      ]
+    },
+    {
+      "id": "w45",
+      "x": 800,
+      "y": 394,
+      "connections": [
+        "w44",
+        "w42"
+      ]
+    }
+  ]
+}

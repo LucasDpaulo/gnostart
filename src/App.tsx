@@ -1,16 +1,14 @@
-import { Suspense, lazy } from 'react';
-import './App.css';
+import { VenueMap } from './components/VenueMap/VenueMap';
 
-const ModaCenterMap = lazy(() => import('./components/Maps/Gnomon'));
+const DEFAULT_VENUE = import.meta.env.VITE_DEFAULT_VENUE ?? 'gnostart-2026';
+
+function getVenueId(): string {
+  const match = window.location.pathname.match(/^\/venue\/([a-z0-9_-]+)/i);
+  return match?.[1] ?? DEFAULT_VENUE;
+}
 
 function App() {
-  return (
-    <div className='App'>
-      <Suspense fallback={<div className='app-loading'>Abrindo o mapa operacional...</div>}>
-        <ModaCenterMap />
-      </Suspense>
-    </div>
-  );
+  return <VenueMap venueId={getVenueId()} />;
 }
 
 export default App;

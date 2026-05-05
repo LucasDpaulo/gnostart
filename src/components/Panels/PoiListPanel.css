@@ -1,0 +1,98 @@
+.poi-list__search {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.poi-list__search:focus {
+  border-color: #6a38d0;
+}
+
+.poi-list__filters {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.poi-list__filter {
+  padding: 6px 12px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 20px;
+  background: #fff;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 120ms ease;
+}
+
+.poi-list__filter--active {
+  background: #6a38d0;
+  color: #fff;
+  border-color: #6a38d0;
+}
+
+.poi-list__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.poi-list__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.poi-list__item-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 4px;
+  border: none;
+  background: none;
+  font-size: 15px;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.poi-list__item-icon {
+  font-size: 20px;
+  width: 28px;
+  text-align: center;
+}
+
+.poi-list__item-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.poi-list__nav-btn {
+  padding: 8px;
+  border: none;
+  background: none;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 120ms ease;
+}
+
+.poi-list__nav-btn:hover {
+  background: #f0f0f0;
+}
+
+.poi-list__empty {
+  padding: 20px 4px;
+  color: #999;
+  text-align: center;
+  font-size: 14px;
+}

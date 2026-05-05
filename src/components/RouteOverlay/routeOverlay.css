@@ -1,0 +1,9 @@
+.route-path {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+}
+
+.route-animate .route-path {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1.2s ease-in-out;
+}
