@@ -1,4 +1,4 @@
-# Gnomon (gnostart)
+# Gnomon
 
 Interactive event venue mapping and navigation app.
 

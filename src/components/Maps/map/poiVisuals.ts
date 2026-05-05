@@ -172,7 +172,13 @@ const scopeSvgIds = (svgMarkup: string, scopeId: string) => {
   }, svgMarkup);
 };
 
-const buildPoiMarkerColorPairs = (accent: string) => [
+const colorPairsCache = new Map<string, readonly (readonly [string, string])[]>();
+const colorizedSvgCache = new Map<string, string>();
+
+const buildPoiMarkerColorPairs = (accent: string) => {
+  const cached = colorPairsCache.get(accent);
+  if (cached) return cached;
+  const pairs = [
   ['#8F5BCE', mixColors('#8F5BCE', accent, 0.18)],
   ['#6E37A6', mixColors('#6E37A6', accent, 0.22)],
   ['#4B1F7D', mixColors('#4B1F7D', accent, 0.2)],
@@ -196,12 +202,21 @@ const buildPoiMarkerColorPairs = (accent: string) => [
   ['#E6DBFB', mixColors('#E6DBFB', accent, 0.1)],
   ['#F6F2FF', mixColors('#F6F2FF', accent, 0.04)],
 ] as const;
+  colorPairsCache.set(accent, pairs);
+  return pairs;
+};
 
-const colorizePinMapaSvg = (svgMarkup: string, accent: string) =>
-  buildPoiMarkerColorPairs(accent).reduce(
+const colorizePinMapaSvg = (svgMarkup: string, accent: string) => {
+  const cacheKey = accent;
+  const cached = colorizedSvgCache.get(cacheKey);
+  if (cached) return cached;
+  const result = buildPoiMarkerColorPairs(accent).reduce(
     (output, [rawColor, replacement]) => output.replace(new RegExp(escapeRegExp(rawColor), 'gi'), replacement),
     svgMarkup,
   );
+  colorizedSvgCache.set(cacheKey, result);
+  return result;
+};
 
 const sanitizeSvgScopeId = (value: string) => value.replace(/[^a-z0-9_-]/gi, '-').toLowerCase();
 const escapeHtmlAttribute = (value: string) =>

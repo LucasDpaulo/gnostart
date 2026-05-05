@@ -262,10 +262,10 @@ const getPathSliceUntilProgress = (positions: [number, number][], progress: numb
 
   return positions;
 };
-const POI_ACCESS_STORAGE_KEY = 'gnostart.poiAccessCount.mapaGeral';
-const POI_RUNTIME_BACKUP_STORAGE_KEY = 'gnostart.poiRuntimeBackup.mapaGeral';
-const ADMIN_POI_WORKSPACE_STORAGE_KEY = 'gnostart.adminPoiWorkspace.mapaGeral';
-const ADMIN_AGENDA_POI_LINKS_STORAGE_KEY = 'gnostart.adminAgendaPoiLinks.mapaGeral';
+const POI_ACCESS_STORAGE_KEY = 'gnomon.poiAccessCount.mapaGeral';
+const POI_RUNTIME_BACKUP_STORAGE_KEY = 'gnomon.poiRuntimeBackup.mapaGeral';
+const ADMIN_POI_WORKSPACE_STORAGE_KEY = 'gnomon.adminPoiWorkspace.mapaGeral';
+const ADMIN_AGENDA_POI_LINKS_STORAGE_KEY = 'gnomon.adminAgendaPoiLinks.mapaGeral';
 const MOBILE_MEDIA_QUERY = '(max-width: 900px)';
 const COMPACT_MEDIA_QUERY = '(max-width: 1180px), (max-height: 760px)';
 const PRESENTATION_MODE_QUERY_KEY = 'modo';
@@ -277,18 +277,18 @@ const EVENT_LABEL = `Evento ${EVENT_NAME}`;
 const CURRENT_MAP_BUILD_LABEL = formatMapBuildRegistration(CURRENT_MAP_BUILD_REGISTRATION);
 const REMOVED_POI_IDS = new Set<string>(['laboratorio_game', 'armazem_da_criatividade_1773977448618']);
 const PUBLICLY_HIDDEN_POI_IDS = new Set<string>();
-const TUTORIAL_STORAGE_KEY = 'gnostart.mapTutorialSeen.mapaGeral';
+const TUTORIAL_STORAGE_KEY = 'gnomon.mapTutorialSeen.mapaGeral';
 const LEGACY_STORAGE_KEYS_TO_CLEAR = [
-  'gnostart.poiAccessCount',
-  'gnostart.poiRuntimeBackup',
-  'gnostart.adminPoiWorkspace',
-  'gnostart.adminAgendaPoiLinks',
-  'gnostart.mapTutorialSeen.v3',
-  'gnostart.poiAccessCount.logicaNova',
-  'gnostart.poiRuntimeBackup.logicaNova',
-  'gnostart.adminPoiWorkspace.logicaNova',
-  'gnostart.adminAgendaPoiLinks.logicaNova',
-  'gnostart.mapTutorialSeen.logicaNova',
+  'gnomon.poiAccessCount',
+  'gnomon.poiRuntimeBackup',
+  'gnomon.adminPoiWorkspace',
+  'gnomon.adminAgendaPoiLinks',
+  'gnomon.mapTutorialSeen.v3',
+  'gnomon.poiAccessCount.logicaNova',
+  'gnomon.poiRuntimeBackup.logicaNova',
+  'gnomon.adminPoiWorkspace.logicaNova',
+  'gnomon.adminAgendaPoiLinks.logicaNova',
+  'gnomon.mapTutorialSeen.logicaNova',
 ];
 // Ajuste manual rapido de layout. Troque estes valores para calibrar a interface sem expor botoes no app.
 const BRAND_LOGO_SCALE = 1.2;
@@ -978,7 +978,6 @@ const ModaCenterMap = () => {
       }
     };
   }, []);
-  const routeShadowColor = mixColors(BRAND_COLORS.ink, BRAND_COLORS.primaryStrong, 0.24);
   const routeGuideColor = mixColors(BRAND_COLORS.highlight, BRAND_COLORS.surface, 0.36);
   const previewMarkerTone = mixColors(BRAND_COLORS.primaryStrong, BRAND_COLORS.ink, 0.1);
 
@@ -2392,14 +2391,14 @@ const ModaCenterMap = () => {
             boxZoom={false}
             keyboard={false}
             dragging={true}
-            zoomSnap={0.25}
-            zoomDelta={0.25}
+            zoomSnap={0.5}
+            zoomDelta={0.5}
             preferCanvas={true}
             zoomAnimation={!prefersReducedMotion}
-            markerZoomAnimation={!prefersReducedMotion}
-            fadeAnimation={!prefersReducedMotion}
-            wheelDebounceTime={40}
-            wheelPxPerZoomLevel={80}
+            markerZoomAnimation={false}
+            fadeAnimation={false}
+            wheelDebounceTime={80}
+            wheelPxPerZoomLevel={120}
           >
             <MapViewportBoundsController
               isMobile={isMobile}
@@ -2448,7 +2447,6 @@ const ModaCenterMap = () => {
               isRouteViewportSettled={isRouteViewportSettled}
               isRouteRevealComplete={isRouteRevealComplete}
               routeRevealHeadPoint={routeRevealHeadPoint}
-              routeShadowColor={routeShadowColor}
               routeGuideColor={routeGuideColor}
               surfaceColor={BRAND_COLORS.surface}
               primaryColor={BRAND_COLORS.primaryStrong}

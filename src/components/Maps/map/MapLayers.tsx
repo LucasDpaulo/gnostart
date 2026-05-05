@@ -12,7 +12,6 @@ export const MapRouteLayer = ({
   isRouteViewportSettled,
   isRouteRevealComplete,
   routeRevealHeadPoint,
-  routeShadowColor,
   routeGuideColor,
   surfaceColor,
   primaryColor,
@@ -24,7 +23,6 @@ export const MapRouteLayer = ({
   isRouteViewportSettled: boolean;
   isRouteRevealComplete: boolean;
   routeRevealHeadPoint: [number, number] | null;
-  routeShadowColor: string;
   routeGuideColor: string;
   surfaceColor: string;
   primaryColor: string;
@@ -37,29 +35,9 @@ export const MapRouteLayer = ({
       <Polyline
         positions={visibleRouteLatLngPoints}
         pathOptions={{
-          color: routeShadowColor,
-          weight: isMobile ? 8 : 9,
-          opacity: 0.08,
-          lineCap: 'round',
-          lineJoin: 'round',
-        }}
-      />
-      <Polyline
-        positions={visibleRouteLatLngPoints}
-        pathOptions={{
-          color: surfaceColor,
-          weight: isMobile ? 5 : 5.6,
-          opacity: 0.96,
-          lineCap: 'round',
-          lineJoin: 'round',
-        }}
-      />
-      <Polyline
-        positions={visibleRouteLatLngPoints}
-        pathOptions={{
           color: primaryColor,
-          weight: isMobile ? 3 : 3.4,
-          opacity: 0.98,
+          weight: isMobile ? 4 : 4.5,
+          opacity: 0.95,
           lineCap: 'round',
           lineJoin: 'round',
         }}
