@@ -9,6 +9,7 @@ import {
 import 'leaflet/dist/leaflet.css';
 import {
   useCallback,
+  useDeferredValue,
   useEffect,
   useMemo,
   useRef,
@@ -1126,12 +1127,14 @@ const ModaCenterMap = () => {
       .slice(0, 8);
   }, [routeSuggestionPois]);
 
+  const deferredDestinationQuery = useDeferredValue(destinationQuery);
+  const deferredOriginQuery = useDeferredValue(originQuery);
   const destinationSuggestions = useMemo(() => {
-    return getRouteSuggestions(destinationQuery);
-  }, [destinationQuery, getRouteSuggestions]);
+    return getRouteSuggestions(deferredDestinationQuery);
+  }, [deferredDestinationQuery, getRouteSuggestions]);
   const originSuggestions = useMemo(() => {
-    return getRouteSuggestions(originQuery).filter((poi) => poi.id !== selectedDestinationId);
-  }, [originQuery, getRouteSuggestions, selectedDestinationId]);
+    return getRouteSuggestions(deferredOriginQuery).filter((poi) => poi.id !== selectedDestinationId);
+  }, [deferredOriginQuery, getRouteSuggestions, selectedDestinationId]);
 
   const selectedAgendaDayMeta = useMemo(
     () => agendaDays.find((day) => day.id === selectedAgendaDay) ?? agendaDays[0],
@@ -1554,24 +1557,24 @@ const ModaCenterMap = () => {
     }));
   };
 
-  const focusPoi = (poi: PointData, registerAccess = true, options?: { moveCamera?: boolean }) => {
+  const focusPoi = useCallback((poi: PointData, registerAccess = true, options?: { moveCamera?: boolean }) => {
     if (registerAccess) registerPoiAccess(poi.id);
     if (isMobile) closeDockPanel();
     setActivePoiId(poi.id);
     if (options?.moveCamera === false) return;
     setFocusPoint(poi);
-  };
+  }, [isMobile, closeDockPanel]);
 
-  const handlePoiListView = (poi: PointData) => {
+  const handlePoiListView = useCallback((poi: PointData) => {
     focusPoi(poi, true);
     closeDockPanel();
-  };
+  }, [focusPoi, closeDockPanel]);
 
-  const handlePoiListNavigate = (poi: PointData) => {
+  const handlePoiListNavigate = useCallback((poi: PointData) => {
     focusPoi(poi, true);
     navigateToPoi(poi);
     closeDockPanel();
-  };
+  }, [focusPoi, navigateToPoi, closeDockPanel]);
 
   const handleSetPoiAsCurrentLocation = useCallback(
     (poi: PointData) => {
@@ -1607,7 +1610,7 @@ const ModaCenterMap = () => {
     );
   };
 
-  const handleMarkerSelection = (poi: PointData) => {
+  const handleMarkerSelection = useCallback((poi: PointData) => {
     if (isAdmin) {
       setEditingPoi({ ...poi });
       setFocusPoint(poi);
@@ -1615,7 +1618,7 @@ const ModaCenterMap = () => {
     }
 
     focusPoi(poi, true);
-  };
+  }, [isAdmin, focusPoi]);
 
   const toggleType = (type: PoiType) => {
     setEnabledTypes((prev) => ({
@@ -1781,7 +1784,7 @@ const ModaCenterMap = () => {
 
   const poiPinScaleTier = getPoiPinScaleTier(mapZoomLevel, mapZoomRange.min, isMobile);
   const poiPinSizes = getPoiPinSizes(isMobile);
-  const getMarkerIcon = (poi: PointData, isActive: boolean) => {
+  const getMarkerIcon = useCallback((poi: PointData, isActive: boolean) => {
     if (!isAdmin && poi.id === selectedDestinationId) {
       return getPoiIcon(poi, poiPinScaleTier, poiPinSizes, true);
     }
@@ -1789,7 +1792,7 @@ const ModaCenterMap = () => {
       return getPoiIcon(poi, poiPinScaleTier, poiPinSizes, true);
     }
     return getPoiIcon(poi, poiPinScaleTier, poiPinSizes, false);
-  };
+  }, [isAdmin, selectedDestinationId, poiPinScaleTier, poiPinSizes]);
   const mapOverlayOpacity = 1;
   const logicalMapOverlayOpacity = isLogicalMapCompareOpen ? 0.78 : isManualOriginPickerOpen ? 0.2 : 0;
   const logicalMapOverlayClassName = isLogicalMapCompareOpen ? 'map-logic-compare-overlay' : 'map-logic-route-overlay';

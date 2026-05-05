@@ -16,6 +16,53 @@ export type GraphNodeCandidate = {
   distance: number;
 };
 
+class MinHeap {
+  private heap: { id: string; f: number }[] = [];
+
+  get size() {
+    return this.heap.length;
+  }
+
+  push(id: string, f: number) {
+    this.heap.push({ id, f });
+    this.bubbleUp(this.heap.length - 1);
+  }
+
+  pop(): string | null {
+    if (this.heap.length === 0) return null;
+    const top = this.heap[0];
+    const last = this.heap.pop()!;
+    if (this.heap.length > 0) {
+      this.heap[0] = last;
+      this.sinkDown(0);
+    }
+    return top.id;
+  }
+
+  private bubbleUp(i: number) {
+    while (i > 0) {
+      const parent = (i - 1) >> 1;
+      if (this.heap[parent].f <= this.heap[i].f) break;
+      [this.heap[parent], this.heap[i]] = [this.heap[i], this.heap[parent]];
+      i = parent;
+    }
+  }
+
+  private sinkDown(i: number) {
+    const n = this.heap.length;
+    while (true) {
+      let smallest = i;
+      const left = 2 * i + 1;
+      const right = 2 * i + 2;
+      if (left < n && this.heap[left].f < this.heap[smallest].f) smallest = left;
+      if (right < n && this.heap[right].f < this.heap[smallest].f) smallest = right;
+      if (smallest === i) break;
+      [this.heap[smallest], this.heap[i]] = [this.heap[i], this.heap[smallest]];
+      i = smallest;
+    }
+  }
+}
+
 const getGraphBounds = (source: Graph) => {
   const nodes = Object.values(source);
   if (nodes.length === 0) {
@@ -196,16 +243,20 @@ export const getNodePosition = (nodeId: string): { x: number; y: number } | null
 
 export const findNearestNodes = (x: number, y: number, maxDistance = 50, limit = 12): GraphNodeCandidate[] => {
   const candidates: GraphNodeCandidate[] = [];
+  const maxDistSq = maxDistance * maxDistance;
+
   for (const id in graph) {
     const node = graph[id];
-    const dist = Math.hypot(node.x - x, node.y - y);
+    const dx = node.x - x;
+    const dy = node.y - y;
+    const distSq = dx * dx + dy * dy;
 
-    if (dist <= maxDistance) {
+    if (distSq <= maxDistSq) {
       candidates.push({
         id,
         x: node.x,
         y: node.y,
-        distance: dist,
+        distance: Math.sqrt(distSq),
       });
     }
   }
@@ -225,6 +276,8 @@ export const findNearestNode = (x: number, y: number, maxDistance = 50): string 
 export const isRoutableNodeId = (nodeId: string | null | undefined): nodeId is string =>
   typeof nodeId === 'string' && Boolean(graph[nodeId]) && isPrimaryRouteNode(nodeId);
 
+const routableNodeIds: string[] = Object.keys(graph).filter(isPrimaryRouteNode);
+
 export const findNearestRoutableNodes = (
   x: number,
   y: number,
@@ -232,19 +285,21 @@ export const findNearestRoutableNodes = (
   limit = 12,
 ): GraphNodeCandidate[] => {
   const candidates: GraphNodeCandidate[] = [];
+  const maxDistSq = maxDistance * maxDistance;
 
-  for (const id in graph) {
-    if (!isPrimaryRouteNode(id)) continue;
-
+  for (let i = 0; i < routableNodeIds.length; i++) {
+    const id = routableNodeIds[i];
     const node = graph[id];
-    const dist = Math.hypot(node.x - x, node.y - y);
-    if (dist > maxDistance) continue;
+    const dx = node.x - x;
+    const dy = node.y - y;
+    const distSq = dx * dx + dy * dy;
+    if (distSq > maxDistSq) continue;
 
     candidates.push({
       id,
       x: node.x,
       y: node.y,
-      distance: dist,
+      distance: Math.sqrt(distSq),
     });
   }
 
@@ -308,48 +363,37 @@ export const findPath = (startId: string, endId: string) => {
     return null;
   }
 
-  const openSet = new Set<string>([startId]);
+  const openHeap = new MinHeap();
+  const inOpen = new Set<string>([startId]);
+  const closed = new Set<string>();
   const cameFrom: Record<string, string> = {};
   const gScore: Record<string, number> = { [startId]: 0 };
-  const fScore: Record<string, number> = { [startId]: heuristic(startId, endId) };
 
-  const getLowestF = () => {
-    let lowestNode: string | null = null;
-    let lowestVal = Infinity;
+  openHeap.push(startId, heuristic(startId, endId));
 
-    openSet.forEach((node) => {
-      const score = fScore[node] ?? Infinity;
-      if (score < lowestVal) {
-        lowestVal = score;
-        lowestNode = node;
-      }
-    });
-
-    return lowestNode;
-  };
-
-  while (openSet.size > 0) {
-    const current = getLowestF();
+  while (openHeap.size > 0) {
+    const current = openHeap.pop();
 
     if (!current) break;
     if (current === endId) {
       return reconstructPath(cameFrom, current);
     }
 
-    openSet.delete(current);
+    inOpen.delete(current);
+    closed.add(current);
 
     const neighbors = graph[current].neighbors || [];
     for (const neighbor of neighbors) {
+      if (closed.has(neighbor)) continue;
+
       const tentativeGScore = (gScore[current] ?? Infinity) + getTraversalCost(current, neighbor);
 
       if (tentativeGScore < (gScore[neighbor] ?? Infinity)) {
         cameFrom[neighbor] = current;
         gScore[neighbor] = tentativeGScore;
-        fScore[neighbor] = tentativeGScore + heuristic(neighbor, endId);
-
-        if (!openSet.has(neighbor)) {
-          openSet.add(neighbor);
-        }
+        const f = tentativeGScore + heuristic(neighbor, endId);
+        openHeap.push(neighbor, f);
+        inOpen.add(neighbor);
       }
     }
   }

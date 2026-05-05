@@ -649,10 +649,18 @@ export const useRouteNavigation = ({
       config.routeRevealMsPerMeter,
     );
 
+    let lastUpdateTime = 0;
+    const THROTTLE_MS = 80;
+
     const revealStep = () => {
-      const elapsed = performance.now() - animationStart;
+      const now = performance.now();
+      const elapsed = now - animationStart;
       const progress = Math.min(1, elapsed / animationDurationMs);
-      setRouteRevealProgress(easeInOutCubic(progress));
+
+      if (progress >= 1 || now - lastUpdateTime >= THROTTLE_MS) {
+        setRouteRevealProgress(easeInOutCubic(progress));
+        lastUpdateTime = now;
+      }
 
       if (progress < 1) {
         routeRevealFrameRef.current = window.requestAnimationFrame(revealStep);
